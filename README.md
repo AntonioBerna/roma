@@ -65,7 +65,7 @@ Of course, depending on your needs you can also use `roma.py` inside an `x` proj
 If you've gotten to this point, it means that the project has intrigued you, so I'll explain right away how to download it. First of all, you have to clone the repository using the following command:
 
 ```
-git clone ...
+git clone https://github.com/AntonioBerna/roma.git
 ```
 
 subsequently, using the command `cd roma` you will be able to access the `roma` directory and then view its contents with the command `ls` and among the various files you will find the file `roma.py`.
