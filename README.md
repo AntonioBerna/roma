@@ -8,6 +8,9 @@
 |_| \_\untime  \___/ptimization and |_|  |_|emory /_/   \_\nalysis
 ```
 
+> [!TIP]
+> Would you like to create these custom texts using `figlet`? For more information click [here](https://github.com/AntonioBerna/maximus.git).
+
 > [!WARNING]
 > At the moment there is only support for the `C` language but in the future I plan to add support for `C++` and `Python` as well.
 
