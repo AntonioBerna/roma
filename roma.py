@@ -4,6 +4,7 @@ import subprocess
 import argparse
 import shutil
 from typing import Type
+import signal
 
 
 class BaseCompiler:
@@ -96,6 +97,16 @@ class CCompiler(BaseCompiler):
             raise RuntimeError("Valgrind failed.")
         print(f"Valgrind completed. Check {os.path.join(self.log_dir, self.valgrind_log)}")
 
+# TODO: Implement Assembly
+class AssemblyCompiler(BaseCompiler):
+    def setup(self, args: argparse.Namespace) -> None:
+        raise NotImplementedError("Assembly support is not implemented yet.")
+    
+    def build(self) -> None:
+        raise NotImplementedError("Assembly support is not implemented yet.")
+    
+    def valgrind_test(self) -> None:
+        raise NotImplementedError("Assembly support is not implemented yet.")
 
 # TODO: Implement C++
 class CppCompiler(BaseCompiler):
@@ -121,7 +132,18 @@ class PythonInterpreter(BaseCompiler):
         raise NotImplementedError("Python support is not implemented yet.")
 
 
+def signal_handler(sig, frame):
+    script_name = os.path.basename(__file__)
+
+    if sig == signal.SIGINT:
+        print(f"\n{script_name}: {sig} signal received.")
+    elif sig == signal.SIGQUIT:
+        print(f"\n{script_name}: {sig} signal received.")
+        sys.exit(0)
+
 def main():
+    signal.signal(signal.SIGINT, signal_handler)
+
     parser = argparse.ArgumentParser(description="Roma - Runtime Optimization and Memory Analysis")
 
     parser.add_argument("project_dir", type=str, help="Path to the project directory.")
@@ -140,6 +162,7 @@ def main():
 
     compilers: dict[str, Type[BaseCompiler]] = {
         "c": CCompiler,
+        "asm": AssemblyCompiler,
         "cpp": CppCompiler,
         "py": PythonInterpreter
     }
