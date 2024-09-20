@@ -85,6 +85,9 @@ Now we have two possibilities: install `roma` inside our computer using the `ins
 > [!WARNING]
 > If you use another distro than `Manjaro` or `Arch` you may have to modify the `install.sh` script. For any problems open an issue or pull-request on the repository.
 
+> [!WARNING]
+> For generate a `roma` ELF file using `install.sh` script you need to install `requirements.txt` using the command `pip install -r requirements.txt`. Otherwise, you can install `pyinstaller` using `pipx install pyinstaller`.
+
 I recommend installing the software inside the system so that it can be invoked from any point of your computer and to do this you need to use this command:
 
 ```
