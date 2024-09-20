@@ -146,18 +146,24 @@ def main():
 
     parser = argparse.ArgumentParser(description="Roma - Runtime Optimization and Memory Analysis")
 
-    parser.add_argument("project_dir", type=str, help="Path to the project directory.")
-    parser.add_argument("-l", "--language", type=str, help="Specify the language of the project.", required=True, default=None)
+    parser.add_argument("project_dir", type=str, help="path to the project directory.")
+    parser.add_argument("-l", "--language", type=str, help="specify the language of the project.", required=True, default=None)
 
-    parser.add_argument("-b", "--build", action="store_const", const="-b", dest="option", help="Build the project.")
-    parser.add_argument("-v", "--valgrind", action="store_const", const="-v", dest="option", help="Run valgrind.")
-    parser.add_argument("-c", "--clean", action="store_const", const="-c", dest="option", help="Clean the project.")
+    parser.add_argument("-b", "--build", action="store_const", const="-b", dest="option", help="build the project.")
+    parser.add_argument("-v", "--valgrind", action="store_const", const="-v", dest="option", help="run valgrind.")
+    parser.add_argument("-c", "--clean", action="store_const", const="-c", dest="option", help="clean the project.")
 
-    parser.add_argument("--compiler", type=str, help="Specify the compiler to use.", default=None)
-    parser.add_argument("--flags", type=str, help="Specify the flags to use.", default=None)
-    parser.add_argument("--target", type=str, help="Specify the target to use.", default=None)
-    parser.add_argument("--target-options", type=str, help="Specify the target options to use.", default="")
+    parser.add_argument("--compiler", type=str, help="specify the compiler to use.", default=None)
+    parser.add_argument("--flags", type=str, help="specify the flags to use.", default=None)
+    parser.add_argument("--target", type=str, help="specify the target to use.", default=None)
+    parser.add_argument("--target-options", type=str, help="specify the target options to use.", default="")
     
+    parser.add_argument("--version", action="version", version="roma v1.0")
+
+    if len(sys.argv) == 1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
     args = parser.parse_args()
 
     compilers: dict[str, Type[BaseCompiler]] = {
