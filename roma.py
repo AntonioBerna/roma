@@ -156,7 +156,7 @@ def main():
     parser.add_argument("--compiler", type=str, help="specify the compiler to use.", default=None)
     parser.add_argument("--flags", type=str, help="specify the flags to use.", default=None)
     parser.add_argument("--target", type=str, help="specify the target to use.", default=None)
-    parser.add_argument("--target-opt", type=str, help="specify the target options to use.", default="")
+    parser.add_argument("--target-options", type=str, help="specify the target options to use.", default="")
     
     parser.add_argument("--version", action="version", version="roma v1.0")
 
