@@ -130,8 +130,7 @@ in order to obtain:
 
 ```
 usage: roma [-h] -l LANGUAGE [-b] [-v] [-c] [--compiler COMPILER]
-            [--flags FLAGS] [--target TARGET]
-            [--target-options TARGET_OPTIONS] [--version]
+            [--target TARGET] [--target-options TARGET_OPTIONS] [--version]
             project_dir
 
 Roma - Runtime Optimization and Memory Analysis
@@ -147,7 +146,6 @@ options:
   -v, --valgrind        run valgrind.
   -c, --clean           clean the project.
   --compiler COMPILER   specify the compiler to use.
-  --flags FLAGS         specify the flags to use.
   --target TARGET       specify the target to use.
   --target-options TARGET_OPTIONS
                         specify the target options to use.
