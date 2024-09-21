@@ -12,7 +12,8 @@ class BaseCompiler:
         """Initialize the compiler with the given arguments."""
         self.project_dir = args.project_dir.rstrip("/")
         self.compiler = args.compiler
-        self.flags = args.flags
+        # self.flags = args.flags
+        # self.libs = args.libs
         self.target = args.target
         self.target_options = args.target_options
         self.initialize_paths()
@@ -60,9 +61,11 @@ class CCompiler(BaseCompiler):
         """Set up default values and configurations for C language."""
         self.compilers = ["gcc", "clang"]
         self.cflags = "-Wall -Wextra -Werror -Wpedantic -g -std=c11"
+        self.clibs = "-lm -lpthread"
         self.valgrind_log = "valgrind.txt"
         self.compiler = self.compiler if self.compiler in self.compilers else self.compilers[0]
-        self.flags = self.flags if self.flags else self.cflags
+        # self.flags = self.flags if self.flags != "" else self.cflags
+        # self.libs = self.libs if self.libs != "" else self.clibs
         if self.project_dir != ".":
             self.target = self.target if self.target else os.path.basename(self.project_dir)
         else:
@@ -78,7 +81,7 @@ class CCompiler(BaseCompiler):
         if not src_files:
             raise FileNotFoundError("No source files found.")
 
-        compile_command = [self.compiler] + self.flags.split() + self.include_flags.split() + ["-o", os.path.join(self.binary_dir, self.target)] + src_files
+        compile_command = [self.compiler] + self.cflags.split() + self.include_flags.split() + ["-o", os.path.join(self.binary_dir, self.target)] + src_files + self.clibs.split()
         result = subprocess.run(compile_command)
         if result.returncode != 0:
             raise RuntimeError("Build failed.")
@@ -97,6 +100,7 @@ class CCompiler(BaseCompiler):
             raise RuntimeError("Valgrind failed.")
         print(f"Valgrind completed. Check {os.path.join(self.log_dir, self.valgrind_log)}")
 
+
 # TODO: Implement Assembly
 class AssemblyCompiler(BaseCompiler):
     def setup(self, args: argparse.Namespace) -> None:
@@ -107,6 +111,7 @@ class AssemblyCompiler(BaseCompiler):
     
     def valgrind_test(self) -> None:
         raise NotImplementedError("Assembly support is not implemented yet.")
+
 
 # TODO: Implement C++
 class CppCompiler(BaseCompiler):
@@ -141,6 +146,7 @@ def signal_handler(sig, frame):
         print(f"\n{script_name}: {sig} signal received.")
         sys.exit(0)
 
+
 def main():
     signal.signal(signal.SIGINT, signal_handler)
 
@@ -154,7 +160,8 @@ def main():
     parser.add_argument("-c", "--clean", action="store_const", const="-c", dest="option", help="clean the project.")
 
     parser.add_argument("--compiler", type=str, help="specify the compiler to use.", default=None)
-    parser.add_argument("--flags", type=str, help="specify the flags to use.", default=None)
+    # parser.add_argument("--flags", type=str, help="specify the flags to use.", default="")
+    # parser.add_argument("--libs", type=str, help="specify the libs to use.", default="")
     parser.add_argument("--target", type=str, help="specify the target to use.", default=None)
     parser.add_argument("--target-options", type=str, help="specify the target options to use.", default="")
     
