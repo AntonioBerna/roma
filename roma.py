@@ -60,7 +60,7 @@ class CCompiler(BaseCompiler):
     def setup(self, args: argparse.Namespace) -> None:
         """Set up default values and configurations for C language."""
         self.compilers = ["gcc", "clang"]
-        self.cflags = "-Wall -Wextra -Werror -Wpedantic -g -std=c11"
+        self.cflags = "-Wall -Wextra -Werror -Wpedantic -g -std=c17"
         self.clibs = "-lm -lpthread"
         self.valgrind_log = "valgrind.txt"
         self.compiler = self.compiler if self.compiler in self.compilers else self.compilers[0]
@@ -150,7 +150,7 @@ def signal_handler(sig, frame):
 def main():
     signal.signal(signal.SIGINT, signal_handler)
 
-    parser = argparse.ArgumentParser(description="Roma - Runtime Optimization and Memory Analysis")
+    parser = argparse.ArgumentParser(description="roma - Runtime Optimization and Memory Analysis")
 
     parser.add_argument("project_dir", type=str, help="path to the project directory.")
     parser.add_argument("-l", "--language", type=str, help="specify the language of the project.", required=True, default=None)
