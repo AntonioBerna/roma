@@ -12,11 +12,14 @@
 > Would you like to create these custom texts using `figlet`? For more information click [here](https://github.com/AntonioBerna/maximus.git).
 
 > [!WARNING]
-> At the moment there is only support for the `C` language but in the future I plan to add support for `Assembly`, `C++` and `Python` as well.
+> This repository is unfinished. Keep your expectations low.
+
+> [!WARNING]
+> At the moment there is only support for the `C` language but in the future I plan to add support for `Assembly`, and `C++` as well.
 
 ## Why `roma`?
 
-I know what you're thinking: why create a software to compile `C` (or `Assembly`, `C++` and `Python`) code if `Makefile` or `CMakeLists.txt` already exist? The answer is simple and now I will explain my reasoning with a simple example.
+I know what you're thinking: why create a software to compile `C` (or `Assembly`, and `C++`) code if `Makefile` or `CMakeLists.txt` already exist? The answer is simple and now I will explain my reasoning with a simple example.
 
 Imagine you have many small projects as shown below:
 
@@ -39,7 +42,7 @@ Each individual project consists of a `main.c` file and a `Makefile`. Of course 
 
 By the way, if for project number `x` I modified the `Makefile` to optimize something, then I have to copy and paste for all the other projects, generating lots of uncontrolled `Makefiles`.
 
-It is for this very reason that I came up with the idea of ​​creating `roma`, an all-in-one software written in `Python` that allows me to compile the `C` (or `Assembly`, `C++` and `Python`) code.
+It is for this very reason that I came up with the idea of ​​creating `roma`, an all-in-one software written in `Python` that allows me to compile the `C` (or `Assembly` and `C++`) code.
 
 As will become clearer later, it is possible to compile the examples in the `examples` directory arranged as follows:
 
@@ -56,8 +59,7 @@ As will become clearer later, it is possible to compile the examples in the `exa
 │   │   │       └── main.c
 │   │   └── simple-hello
 │   │       └── main.c
-│   ├── Cpp
-│   └── Python
+│   └── Cpp
 ├── install.sh
 ├── LICENSE
 ├── README.md
@@ -86,7 +88,7 @@ Now we have two possibilities: install `roma` inside our computer using the `ins
 > If you use another distro than `Manjaro` or `Arch` you may have to modify the `install.sh` script. For any problems open an issue or pull-request on the repository.
 
 > [!WARNING]
-> For generate a `roma` ELF file using `install.sh` script you need to install `requirements.txt` using the command `pip install -r requirements.txt`. Otherwise, you can install `pyinstaller` using `pipx install pyinstaller`.
+> For generate a `roma` ELF file using `install.sh` script you need to install `requirements.txt` using the command `pip install -r requirements.txt`. Otherwise, you can install `pyinstaller v6.11.1` using `pipx install pyinstaller` command.
 
 I recommend installing the software inside the system so that it can be invoked from any point of your computer and to do this you need to use this command:
 
