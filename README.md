@@ -1,3 +1,9 @@
+<p align="center">
+    <img src=".github/imgs/roma-removebg.png" width="250">
+    <br>
+    <strong>Runtime Optimization and Memory Analysis</strong>
+</p>
+
 # roma
 
 ![GitHub License](https://img.shields.io/github/license/AntonioBerna/roma)
