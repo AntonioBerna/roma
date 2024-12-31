@@ -5,7 +5,6 @@ use std::{
     process::{Command, exit, Stdio},
     fmt,
 };
-use ctrlc;
 use colored::*;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, ValueEnum)]
