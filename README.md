@@ -57,26 +57,30 @@ As will become clearer later, it is possible to compile the examples in the `exa
 
 ```
 .
+├── Cargo.lock
+├── Cargo.toml
 ├── examples
-│   ├── Assembly
-│   ├── C
-│   │   ├── complex-hello
-│   │   │   ├── include
-│   │   │   │   └── log.h
-│   │   │   └── src
-│   │   │       ├── log.c
-│   │   │       └── main.c
-│   │   └── simple-hello
-│   │       └── main.c
-│   └── Cpp
-├── install.sh
+│   └── C
+│       ├── complex-hello
+│       │   ├── include
+│       │   │   └── log.h
+│       │   └── src
+│       │       ├── log.c
+│       │       └── main.c
+│       ├── print-args
+│       │   └── main.c
+│       └── simple-hello
+│           └── main.c
+├── legacy-python-version
+│   ├── install.sh
+│   ├── README.md
+│   ├── requirements.txt
+│   └── roma.py
 ├── LICENSE
 ├── README.md
-├── requirements.txt
-└── roma.py
+└── src
+    └── main.rs
 ```
-
-even if on the terminal I have a path that has nothing to do with that of a general project called `x`.
 
 > [!NOTE]
 > Of course, depending on your needs you can also use `roma` inside an `x` project, for example inside a `client-server` application to compile the client and the server separately using the same script and not having two separate `Makefiles` or `CMakeLists.txt`.
@@ -200,7 +204,7 @@ Clean completed.
 Consider the project `examples/C/print-args/`. This example is to understand the use of the `--compiler`, `--target` and `--target-options` options. In particular, using the following command:
 
 ```
-roma --language c --action build --compiler clang --target pippo --target-options "pluto paperino" examples/C/print-args/
+roma --language c --action valgrind --compiler clang --target pippo --target-options "pluto paperino" examples/C/print-args/
 ```
 
 you get the following output:
