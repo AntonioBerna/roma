@@ -26,6 +26,10 @@
 > [!WARNING]
 > At the moment there is only support for the `C` language but in the future I plan to add support for `Assembly`, and `C++` as well.
 
+## Activity
+
+<img src="https://repobeats.axiom.co/api/embed/0d58ecee9de031a6ccc14b5bf32d4c7fd390982e.svg" width="100%" />
+
 ## Why `roma`?
 
 I know what you're thinking: why create a software to compile `C` (or `Assembly`, and `C++`) code if `Makefile` or `CMakeLists.txt` already exist? The answer is simple and now I will explain my reasoning with a simple example.
