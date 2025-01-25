@@ -71,6 +71,7 @@ trait Compiler {
 }
 
 struct CCompiler {
+    project_dir: PathBuf,
     src_dir: PathBuf,
     include_dir: PathBuf,
     binary_dir: PathBuf,
@@ -111,6 +112,7 @@ impl Compiler for CCompiler {
             });
 
         CCompiler {
+            project_dir,
             src_dir,
             include_dir,
             binary_dir,
@@ -139,8 +141,11 @@ impl Compiler for CCompiler {
         let cflags = "-Wall -Wextra -Werror -Wpedantic -g";
         let clibs = "-lm -lpthread";
         let include_flags = self.get_include_flags();
-        let target_path = self.binary_dir.join(&self.target);
-
+        let target_path = if self.project_dir.to_str() == Some(".") {
+            self.binary_dir.join(&self.target)
+        } else {
+            PathBuf::from(".").join(&self.binary_dir).join(&self.target)
+        };
         let output = Command::new(&self.compiler)
             .args(cflags.split_whitespace())
             .args(include_flags.split_whitespace())
@@ -156,7 +161,7 @@ impl Compiler for CCompiler {
             return Err(format!("Build failed:\n{}", error));
         }
 
-        println!("Build completed. Run with ./{}", target_path.display());
+        println!("Build completed. Run with {}", target_path.display());
         Ok(())
     }
 
@@ -167,7 +172,11 @@ impl Compiler for CCompiler {
             .map_err(|e| format!("Failed to create log directory: {}", e))?;
 
         let valgrind_log = self.log_dir.join("valgrind.txt");
-        let target_path = self.binary_dir.join(&self.target);
+        let target_path = if self.project_dir.to_str() == Some(".") {
+            self.binary_dir.join(&self.target)
+        } else {
+            PathBuf::from(".").join(&self.binary_dir).join(&self.target)
+        };
         let valgrind_flags = format!(
             "--leak-check=full --show-leak-kinds=all --log-file={}",
             valgrind_log.display()
