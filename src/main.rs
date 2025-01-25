@@ -138,7 +138,7 @@ impl Compiler for CCompiler {
             return Err("No source files found".to_string());
         }
 
-        let cflags = "-Wall -Wextra -Werror -Wpedantic -g";
+        let cflags = "-Wall -Wextra -Werror -pedantic -g";
         let clibs = "-lm -lpthread";
         let include_flags = self.get_include_flags();
         let target_path = if self.project_dir.to_str() == Some(".") {
